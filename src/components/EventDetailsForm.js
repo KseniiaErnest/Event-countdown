@@ -20,16 +20,19 @@ setLocation('');
 
   return (
 
-  <form onSubmit={handelSubmit}>
+  <form className="event-form" onSubmit={handelSubmit}>
   
-  <label>Name of the Event</label>
+  <label>Name of the Event: 
   <input type="text" value={name} onChange={(e) => setName(e.target.value)}  />
+  </label>
   
-  <label>Date</label>
+  <label>Date: 
   <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-  
-  <label>Location</label>
+  </label>
+
+  <label>Location: 
   <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
+</label>
 
   <button>Add</button>
   

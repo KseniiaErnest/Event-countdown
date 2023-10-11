@@ -12,12 +12,16 @@ export default function App() {
     setEvents((currentEvents) => [...currentEvents, event]);
   };
 
+  const handleDeleteEvent = (id) => {
+    setEvents((currentEvents) => currentEvents.filter((oneEvent) => oneEvent.id !== id ))
+  }
+
 
   return (
     <div className="app">
     <Heading />
       <EventDetailsFrom onAddEvent={handleAddEvent}/>
-      <EventList events={events} />
+      <EventList events={events} onDeleteEvent={handleDeleteEvent}/>
     </div>
   )
 }
