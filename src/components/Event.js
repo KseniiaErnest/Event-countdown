@@ -19,21 +19,29 @@ export default function Event( {event, onDeleteEvent} ) {
 
   const handleDeleteGuest = (guestName) => {
 setGuestList((currentGuests) => currentGuests.filter((guest) => guest.guestName !== guestName));
+  };
+
+  const handleToggleGuest = (guestName) => {
+setGuestList((currentGuests) => currentGuests.map((guest) => guest.guestName === guestName ? {...guest, invited: !guest.invited} : guest))
   }
 
 return (
-<li>
+<li className="event-container">
+<div>
 <h3>{event.name}</h3>
-<p>{event.date}</p>
-<p>{event.location}</p>
-<button onClick={() => onDeleteEvent(event.id)}>Delete Event</button>
-<button onClick={handleShowGuestForm}>{showGuestFrom ? 'Close' : 'Add a Guest'}</button>
+<p>Date: {event.date}</p>
+<p>Place: {event.location}</p>
+</div>
+
+<button className="btn add-guest" onClick={handleShowGuestForm}>{showGuestFrom ? 'Close' : 'Add a Guest'}</button>
 
 {showGuestFrom && (
   <GuestForm onAddGuest={handleAddGuest} />
 )}
 
-<GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest}/>
+<GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest} onToggleGuest={handleToggleGuest}/>
+
+<button className="btn delete-guest" onClick={() => onDeleteEvent(event.id)}>Delete Event</button>
 </li>
 )
 }

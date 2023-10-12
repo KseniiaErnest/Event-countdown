@@ -9,7 +9,7 @@ e.preventDefault();
 
 if (!guestName) return;
 
-const newGuest = {guestName, contactInfo};
+const newGuest = {guestName, contactInfo, invited: false};
 
 onAddGuest(newGuest);
 setGuestName('');
