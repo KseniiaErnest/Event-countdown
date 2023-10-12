@@ -3,6 +3,7 @@ import GuestForm from "./GuestFrom";
 import Guest from "./Guest";
 import GuestList from "./GuestList";
 import TaskForm from "./TaskForm";
+import TaskList from "./TaskList";
 
 
 export default function Event( {event, onDeleteEvent} ) {
@@ -35,6 +36,14 @@ setShowTaskList((show) => !show);
     setTaskList((currentTaskList) => [...currentTaskList, newTask]);
   };
 
+  const handleToggleTask = (id) => {
+    setTaskList((currentTaskList) => currentTaskList.map((task) => task.id === id ? {...task, completed: !task.completed} : task))
+  };
+
+  const handelDeleteTask = (id) => {
+    setTaskList((currentTaskList) => currentTaskList.filter((task) => task.id !== id))
+  }
+
 return (
 <li className="event-container">
 <div>
@@ -55,6 +64,7 @@ return (
   )}
 
 <GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest} onToggleGuest={handleToggleGuest}/>
+<TaskList taskList={taskList} onToggleTask={handleToggleTask} onDeleteTask={handelDeleteTask} />
 
 <button className="btn delete-guest" onClick={() => onDeleteEvent(event.id)}>Delete Event</button>
 </li>
