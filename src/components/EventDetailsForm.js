@@ -34,7 +34,7 @@ setLocation('');
   <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} />
 </label>
 
-  <button>Add</button>
+  <button className="btn">Add</button>
   
   </form>
   )

@@ -46,15 +46,22 @@ setShowTaskList((show) => !show);
 
 return (
 <li className="event-container">
+<div className="event-box">
+
 <div>
 <h3>{event.name}</h3>
 <p>Date: {event.date}</p>
 <p>Place: {event.location}</p>
 </div>
 
-<button className="btn add-guest" onClick={handleShowGuestForm}>{showGuestFrom ? 'Close' : 'Add a Guest'}</button>
-<button onClick={handleShowTask}>{showTaskList ? 'Close' : 'Add Task'}</button>
+<div className="event-box--btn">
+<button className="btn add-guest" onClick={handleShowGuestForm}>{showGuestFrom ? '❌' : '+💃🏻'}</button>
+<button className="btn add-guest" onClick={handleShowTask}>{showTaskList ? '❌' : '+📝'}</button>
+</div>
 
+</div>
+
+<div className="guest-task-forms-container">
 {showGuestFrom && (
   <GuestForm onAddGuest={handleAddGuest} />
 )}
@@ -62,6 +69,7 @@ return (
 {showTaskList && (
   <TaskForm onAddTask={handleAddTask} />
   )}
+  </div>
 
 <GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest} onToggleGuest={handleToggleGuest}/>
 <TaskList taskList={taskList} onToggleTask={handleToggleTask} onDeleteTask={handelDeleteTask} />

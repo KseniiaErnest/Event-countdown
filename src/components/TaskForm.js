@@ -17,7 +17,7 @@ setTaskPriority('');
   }
 
   return (
-    <form onSubmit={handleSubmitTask}>
+    <form className="form" onSubmit={handleSubmitTask}>
 
       <label>To-Do Task:
         <input type="text" value={taskName} onChange={(e) => setTaskName((e.target.value))} />
@@ -31,7 +31,7 @@ setTaskPriority('');
       </select>
       </label>
 
-<button>Add Task</button>
+<button>+</button>
 
     </form>
   )

@@ -18,7 +18,7 @@ setContactInfo('');
 }
 
   return (
-    <form onSubmit={handleSubmitGuest}>
+    <form className="form" onSubmit={handleSubmitGuest}>
       <label>Name:
         <input type="text" value={guestName} onChange={(e) => setGuestName(e.target.value)}  />
       </label>
@@ -27,7 +27,7 @@ setContactInfo('');
         <input type="text" value={contactInfo} onChange={(e) => setContactInfo(e.target.value)} />
       </label>
 
-      <button>Add</button>
+      <button>+</button>
     </form>
   )
 }
