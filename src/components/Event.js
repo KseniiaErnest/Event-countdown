@@ -9,6 +9,7 @@ import TaskList from "./TaskList";
 export default function Event( {event, onDeleteEvent} ) {
   const [showGuestFrom, setShowGuestFrom] = useState(false);
   const [showTaskList, setShowTaskList] = useState(false);
+  const [showEvent, setShowEvent] = useState(false);
 
   const [guestList, setGuestList] = useState([]);
   const [taskList, setTaskList] = useState([]);
@@ -42,26 +43,41 @@ setShowTaskList((show) => !show);
 
   const handelDeleteTask = (id) => {
     setTaskList((currentTaskList) => currentTaskList.filter((task) => task.id !== id))
+  };
+
+
+  // Event
+  const handleShowEvent = () => {
+    setShowEvent((show) => !show);
   }
 
 return (
-<li className="event-container">
+<li className={showEvent ? "event-container" : 'event--closed'}>
+
 <div className="event-box">
+<h3 onClick={handleShowEvent}>{event.name}</h3>
+
+{showEvent && (<div className="event-box--btn">
+<button className="btn add-guest" onClick={handleShowGuestForm} disabled={showTaskList}>{showGuestFrom ? '❌' : '+💃🏻'}</button>
+<button className="btn add-guest" onClick={handleShowTask} disabled={showGuestFrom}>{showTaskList ? '❌' : '+📝'}</button>
+<button className="btn add-guest" onClick={() => onDeleteEvent(event.id)}>🗑️</button>
+
+</div>)}
+
+
+</div>
+
+{showEvent && (
+  <div>
+
 
 <div>
-<h3>{event.name}</h3>
 <p>Date: {event.date}</p>
 <p>Place: {event.location}</p>
 </div>
 
-<div className="event-box--btn">
-<button className="btn add-guest" onClick={handleShowGuestForm}>{showGuestFrom ? '❌' : '+💃🏻'}</button>
-<button className="btn add-guest" onClick={handleShowTask}>{showTaskList ? '❌' : '+📝'}</button>
-</div>
 
-</div>
-
-<div className="guest-task-forms-container">
+<div className="guest-task-forms-container" style={{ height: (showGuestFrom || showTaskList) ? '45px' : '45px' }}>
 {showGuestFrom && (
   <GuestForm onAddGuest={handleAddGuest} />
 )}
@@ -74,7 +90,17 @@ return (
 <GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest} onToggleGuest={handleToggleGuest}/>
 <TaskList taskList={taskList} onToggleTask={handleToggleTask} onDeleteTask={handelDeleteTask} />
 
-<button className="btn delete-guest" onClick={() => onDeleteEvent(event.id)}>Delete Event</button>
+{/* <div className="event-box--btn">
+<button className="btn add-guest" onClick={handleShowGuestForm} disabled={showTaskList}>{showGuestFrom ? '❌' : '+💃🏻'}</button>
+<button className="btn add-guest" onClick={handleShowTask} disabled={showGuestFrom}>{showTaskList ? '❌' : '+📝'}</button>
+<button className="btn add-guest" onClick={() => onDeleteEvent(event.id)}>🗑️</button>
+
+</div> */}
+</div>
+
+
+)}
+
 </li>
 )
 }
