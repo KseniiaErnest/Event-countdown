@@ -2,7 +2,7 @@ import { useState } from "react"
 
 export default function TaskForm( {onAddTask} ) {
   const [taskName, setTaskName] = useState('');
-  const [taskPriority, setTaskPriority] = useState('');
+  const [taskPriority, setTaskPriority] = useState('High');
 
   const handleSubmitTask = (e) => {
 e.preventDefault();
@@ -13,7 +13,7 @@ const newTask = {taskName, taskPriority, completed: false, id: new Date().getTim
 
 onAddTask(newTask);
 setTaskName('');
-setTaskPriority('');
+setTaskPriority('High');
   }
 
   return (

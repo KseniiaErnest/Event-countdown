@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Heading from "./Heading";
-import Event from "./Event"
 import EventDetailsFrom from "./EventDetailsForm";
 import EventList from "./EventList";
 

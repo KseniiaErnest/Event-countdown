@@ -1,12 +1,11 @@
 import { useState } from "react";
 import GuestForm from "./GuestFrom";
-import Guest from "./Guest";
 import GuestList from "./GuestList";
 import TaskForm from "./TaskForm";
 import TaskList from "./TaskList";
 
 
-export default function Event( {event, onDeleteEvent} ) {
+export default function Event( {event, onDeleteEvent, isOpen, onToggleEvent} ) {
   const [showGuestFrom, setShowGuestFrom] = useState(false);
   const [showTaskList, setShowTaskList] = useState(false);
   const [showEvent, setShowEvent] = useState(false);
@@ -45,17 +44,29 @@ setShowTaskList((show) => !show);
     setTaskList((currentTaskList) => currentTaskList.filter((task) => task.id !== id))
   };
 
-
   // Event
-  const handleShowEvent = () => {
-    setShowEvent((show) => !show);
-  }
+  // const handleShowEvent = () => {
+  //   setShowEvent((show) => !show);
+  // };
 
+  const handleEventClick = (e) => {
+    // Check if the click was on the event name
+    if (e.target.tagName.toLowerCase() === "h3") {
+      onToggleEvent(event.id);
+      setShowEvent((show) => !show);
+    } 
+  };
+
+ 
 return (
-<li className={showEvent ? "event-container" : 'event--closed'}>
+<div className="main-container">
+{/* <li className={showEvent ? "event-container" : 'event--closed'}> */}
+<li className={isOpen ? "event-container" : "event--closed"}>
 
 <div className="event-box">
-<h3 onClick={handleShowEvent}>{event.name}</h3>
+{/* <h3 onClick={handleShowEvent}>{event.name}</h3> */}
+{/* <h3 onClick={() => onToggleEvent(event.id)}>{event.name}</h3> */}
+<h3 onClick={handleEventClick}>{event.name}</h3>
 
 {showEvent && (<div className="event-box--btn">
 <button className="btn add-guest" onClick={handleShowGuestForm} disabled={showTaskList}>{showGuestFrom ? '❌' : '+💃🏻'}</button>
@@ -63,7 +74,6 @@ return (
 <button className="btn add-guest" onClick={() => onDeleteEvent(event.id)}>🗑️</button>
 
 </div>)}
-
 
 </div>
 
@@ -87,20 +97,18 @@ return (
   )}
   </div>
 
-<GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest} onToggleGuest={handleToggleGuest}/>
 <TaskList taskList={taskList} onToggleTask={handleToggleTask} onDeleteTask={handelDeleteTask} />
 
-{/* <div className="event-box--btn">
-<button className="btn add-guest" onClick={handleShowGuestForm} disabled={showTaskList}>{showGuestFrom ? '❌' : '+💃🏻'}</button>
-<button className="btn add-guest" onClick={handleShowTask} disabled={showGuestFrom}>{showTaskList ? '❌' : '+📝'}</button>
-<button className="btn add-guest" onClick={() => onDeleteEvent(event.id)}>🗑️</button>
-
-</div> */}
 </div>
-
 
 )}
 
 </li>
+{showEvent && (
+  <GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest} onToggleGuest={handleToggleGuest}/>
+)}
+
+</div>
+
 )
 }

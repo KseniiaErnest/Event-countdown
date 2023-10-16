@@ -4,8 +4,8 @@ export default function GuestList( {guestList, onDeleteGuest, onToggleGuest} ) {
   return (
     <ul className="guest-list">
     <h3>Guests</h3>
-{guestList.map((guest) => (
-  <Guest guest={guest} key={guest.name} onDeleteGuest={onDeleteGuest} onToggleGuest={onToggleGuest} />
+{guestList.map((guest, i) => (
+  <Guest guest={guest} key={i} onDeleteGuest={onDeleteGuest} onToggleGuest={onToggleGuest} />
 ))}
     </ul>
   )
