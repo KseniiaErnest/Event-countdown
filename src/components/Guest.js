@@ -1,8 +1,17 @@
 export default function Guest( {guest, onDeleteGuest, onToggleGuest} ) {
+  
+  const handleCheckboxChange = () => {
+    onToggleGuest(guest.guestName);
+  };
+
   return (
     <li className={ guest.invited ? "guest-container checked" : "guest-container"}>
 <div className="guest-box">
-<input type="checkbox" value={guest.invited} onChange={() => onToggleGuest(guest.guestName)} />
+<input
+          type="checkbox"
+          checked={guest.invited}
+          onChange={handleCheckboxChange}
+        />
 <span>{guest.guestName}</span>
 <span>{guest.contactInfo}</span>
 </div>

@@ -22,7 +22,7 @@ setLocation('');
 
   <form className="event-form" onSubmit={handelSubmit}>
   
-  <label>Name of the Event: 
+  <label>Event: 
   <input type="text" value={name} onChange={(e) => setName(e.target.value)}  />
   </label>
   

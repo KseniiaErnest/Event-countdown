@@ -87,6 +87,10 @@ cursor: pointer;
   justify-content: space-between;
 }
 
+.event-box h3 {
+  cursor: pointer;
+}
+
 .event-box--btn {
 display: flex;
  gap: 1rem;

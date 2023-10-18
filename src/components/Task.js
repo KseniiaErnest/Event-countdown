@@ -3,7 +3,7 @@ export default function Task( {task, onToggleTask, onDeleteTask} ) {
     <li className="task-container" >
 
     <div className="task-box">
-    <input type="checkbox" value={task.completed} onChange={() => onToggleTask(task.id)} />
+    <input type="checkbox" checked={task.completed} onChange={() => onToggleTask(task.id)} />
     <span style={task.completed ? { textDecoration: "line-through" } : {} }>{task.taskName}</span>
     </div>
     

@@ -8,7 +8,6 @@ import TaskList from "./TaskList";
 export default function Event( {event, onDeleteEvent, isOpen, onToggleEvent} ) {
   const [showGuestFrom, setShowGuestFrom] = useState(false);
   const [showTaskList, setShowTaskList] = useState(false);
-  const [showEvent, setShowEvent] = useState(false);
 
   const [guestList, setGuestList] = useState([]);
   const [taskList, setTaskList] = useState([]);
@@ -45,30 +44,22 @@ setShowTaskList((show) => !show);
   };
 
   // Event
-  // const handleShowEvent = () => {
-  //   setShowEvent((show) => !show);
-  // };
-
   const handleEventClick = (e) => {
     // Check if the click was on the event name
     if (e.target.tagName.toLowerCase() === "h3") {
       onToggleEvent(event.id);
-      setShowEvent((show) => !show);
     } 
   };
 
  
 return (
 <div className="main-container">
-{/* <li className={showEvent ? "event-container" : 'event--closed'}> */}
 <li className={isOpen ? "event-container" : "event--closed"}>
 
 <div className="event-box">
-{/* <h3 onClick={handleShowEvent}>{event.name}</h3> */}
-{/* <h3 onClick={() => onToggleEvent(event.id)}>{event.name}</h3> */}
 <h3 onClick={handleEventClick}>{event.name}</h3>
 
-{showEvent && (<div className="event-box--btn">
+{isOpen && (<div className="event-box--btn">
 <button className="btn add-guest" onClick={handleShowGuestForm} disabled={showTaskList}>{showGuestFrom ? '❌' : '+💃🏻'}</button>
 <button className="btn add-guest" onClick={handleShowTask} disabled={showGuestFrom}>{showTaskList ? '❌' : '+📝'}</button>
 <button className="btn add-guest" onClick={() => onDeleteEvent(event.id)}>🗑️</button>
@@ -77,15 +68,13 @@ return (
 
 </div>
 
-{showEvent && (
+{isOpen && (
   <div>
-
 
 <div>
 <p>Date: {event.date}</p>
 <p>Place: {event.location}</p>
 </div>
-
 
 <div className="guest-task-forms-container" style={{ height: (showGuestFrom || showTaskList) ? '45px' : '45px' }}>
 {showGuestFrom && (
@@ -104,11 +93,10 @@ return (
 )}
 
 </li>
-{showEvent && (
+{isOpen && (
   <GuestList guestList={guestList} onDeleteGuest={handleDeleteGuest} onToggleGuest={handleToggleGuest}/>
 )}
 
 </div>
-
 )
 }

@@ -5,7 +5,7 @@ export default function EventList( {events, onDeleteEvent, onToggleGuest} ) {
   const [openEventId, setOpenEventId] = useState(null);
 
   const handleToggleEvent = (eventId) => {
-    setOpenEventId(openEventId === eventId ? null : eventId);
+    setOpenEventId((prevOpenEventId) => (prevOpenEventId === eventId ? null : eventId));
   };
   
   return (
